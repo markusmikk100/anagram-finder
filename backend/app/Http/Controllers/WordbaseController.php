@@ -16,18 +16,15 @@ class WordbaseController extends Controller
         }
 
         $text = $response->body();
-        $word = explode("\n", $text); // Base words
+        $word = explode("\n", $text);
 
-        for ($i = 0; $i < count($word); $i++) { // Words where letters are in alphabetical order
+        for ($i = 0; $i < count($word); $i++) {
             $currentWord = trim($word[$i]);
-
-            $chars = str_split($currentWord);
+            $chars = mb_str_split($currentWord);
             sort($chars);
             $sorted_word = implode('', $chars);
-
-            $pair = [$currentWord, $sorted_word]; // Takes word and sorted words and makes them an array
-            Word::logReceivedPair($pair);
+            Word::logReceivedPair($currentWord, $sorted_word);
             }
-        return;
+        return "import ran";
     }
 }
