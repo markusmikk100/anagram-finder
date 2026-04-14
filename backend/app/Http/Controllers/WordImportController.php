@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Http;
 use App\Services\WordImportService;
 
-class WordbaseController extends Controller
+class WordImportController extends Controller
 {
     public function import(WordImportService $wordImportService)
     {

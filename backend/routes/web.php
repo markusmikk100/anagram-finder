@@ -1,11 +1,12 @@
 <?php
 
-use App\Http\Controllers\WordbaseController;
+use App\Http\Controllers\WordImportController;
+use App\Http\Controllers\WordFindController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/wordbase/import', [WordbaseController::class, 'import']);
-Route::get('/wordbase/find', [WordbaseController::class, 'find']);
+Route::get('/wordbase/import', [WordImportController::class, 'import']);
+Route::get('/wordbase/find', [WordFindController::class, 'find']);
