@@ -3,17 +3,15 @@
 namespace App\Services;
 
 use App\Services\WordSortingService;
+use App\Models\Word;
 
 class WordFindService
 {
     public function findFromWordbase($request)
     {
         $sortedWord = WordSortingService::alphabeticalSort($request);
-
-        error_log($sortedWord);
-        // Word::firstOrCreate(
-        //     ['word' => $currentWord],
-        //     ['sorted_word' => $sortedWord]
-        // );
+        $foundTable = Word::where('sorted_word', '=', $sortedWord)->get();
+        $foundWordTable = $foundTable->pluck('word')->toArray();
+        return $foundWordTable;
     }
 }
