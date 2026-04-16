@@ -14,16 +14,28 @@ class WordImportService
     public function importFromWordbase($response)
     {
         $word = explode("\n", $response->body());
+        $data = [];
+        $now = now();
 
         for ($i = 0; $i < count($word); $i++) {
             $currentWord = trim($word[$i]);
+
+            if ($currentWord === '') {
+                continue;
+            }
+
             $sortedWord = $this->wordSortingService->alphabeticalSort($currentWord);
 
-            error_log($currentWord . ':' . $sortedWord); //Remove after testing
-            Word::firstOrCreate(
-                ['word' => $currentWord],
-                ['sorted_word' => $sortedWord]
-            );
+            $data[] = [
+                'word' => $currentWord,
+                'sorted_word' => $sortedWord,
+                'created_at' => $now,
+                'updated_at' => $now,
+            ];
+        }
+
+        foreach (array_chunk($data, 1000) as $chunk) {
+            Word::insertOrIgnore($chunk);
         }
     }
 
