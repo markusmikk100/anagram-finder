@@ -17,6 +17,6 @@ class WordImportController extends Controller
 
         $wordImportService->importFromWordbase($response);
 
-        return "import ran";
+        return "Wordbase imported";
     }
 }
