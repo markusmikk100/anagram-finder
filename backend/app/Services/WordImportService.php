@@ -8,15 +8,18 @@ use App\Services\WordSortingService;
 ini_set('max_execution_time', 600); # 10min
 class WordImportService
 {
+    public function __construct(protected WordSortingService $wordSortingService)
+    {
+    }
     public function importFromWordbase($response)
     {
         $word = explode("\n", $response->body());
 
         for ($i = 0; $i < count($word); $i++) {
             $currentWord = trim($word[$i]);
-            $sortedWord = WordSortingService::alphabeticalSort($currentWord);
+            $sortedWord = $this->wordSortingService->alphabeticalSort($currentWord);
 
-            error_log($currentWord . ':' . $sortedWord);
+            error_log($currentWord . ':' . $sortedWord); //Remove after testing
             Word::firstOrCreate(
                 ['word' => $currentWord],
                 ['sorted_word' => $sortedWord]
