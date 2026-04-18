@@ -9,4 +9,4 @@ Route::get('/', function () {
 });
 
 Route::get('/wordbase/import', [WordImportController::class, 'import']);
-Route::get('/wordbase/find', [WordFindController::class, 'find']);
+Route::get('/wordbase/find/{word}', [WordFindController::class, 'find']);

@@ -3,12 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Services\WordFindService;
+use Illuminate\Http\Request;
 class WordFindController extends Controller
 {
-    public function find(WordFindService $wordFindService)
+    public function find(WordFindService $wordFindService, Request $request)
     {
-        $request = "ilutaim";
-        $foundWordTable = $wordFindService->findFromWordbase($request);
+        $word = $request->route('word');
+        $foundWordTable = $wordFindService->findFromWordbase($word);
         return response()->json($foundWordTable);
     }
 }
