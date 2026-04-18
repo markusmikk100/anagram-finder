@@ -1,18 +1,95 @@
-.page {
-  display: flex;
-  width: 100%;
-  min-height: 100vh;
-  align-items: center;
-  justify-content: space-between;
-  padding: 24px;
-  box-sizing: border-box;
+:root {
+  --white: #e9fdfd;
+  --main: #393E46;
+  --border: #555b64;
+  --accent: #009198;
+  --accent-hover: #005e63;
+  --text-shadow: #24b8c0;
+  --gradient: linear-gradient(125deg, var(--accent), #00f2ff);
+  --gradient-hover: linear-gradient(125deg, var(--accent-hover), #00b7cb);
 }
 
-.action-btn {
-  padding: 10px 14px;
-  border: 1px solid #0f3a4e;
-  border-radius: 8px;
-  background: #4f5e8b;
-  color: #0c0222;
+.page {
+  min-height: 5vh;
+  display: grid;
+  gap: 1rem;
+  padding: 2.5rem 1rem;
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.title {
+  text-align: center;
+  font-size: 2rem;
+  background: var(--gradient);
+  background-clip: text;
+  color: transparent;
+  text-shadow: 0 0 100px var(--text-shadow);
+}
+
+.panel {
+  background: var(--main);
+  border: 3px solid var(--border);
+  border-radius: 20px;
+  padding: 1.5rem;
+  padding-top: 1rem;
+}
+
+.panel h2 {
+  margin: 0 0 0.75rem;
+  color: var(--white);
+  font-size: 1.35rem;
+}
+
+.mode-switch {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  overflow: hidden;
+  background: var(--main);
+}
+
+.mode-switch__button {
+  border: 0;
+  padding: 0.75rem 1rem;
+  font: inherit;
+  font-size: 18px;
+  font-weight: 600;
   cursor: pointer;
+  background: transparent;
+  color: var(--white);
+}
+
+.mode-switch__button.active {
+  background: var(--gradient);
+}
+
+.form {
+  display: grid;
+  gap: 0.5rem;
+}
+
+.form input {
+  width: 100%;
+  border: 2px solid var(--border);
+  border-radius: 12px;
+  padding: 0.75rem;
+  font-size: large;
+  background: var(--white);
+}
+
+.form button {
+  border: 0;
+  border-radius: 12px;
+  padding: 0.75rem 0.9rem;
+  font-size: larger;
+  font-weight: 700;
+  color: var(--white);
+  background: var(--gradient);
+  cursor: pointer;
+}
+
+.form button:hover {
+  background: var(--gradient-hover);
 }

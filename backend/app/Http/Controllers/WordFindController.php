@@ -9,6 +9,6 @@ class WordFindController extends Controller
     {
         $request = "ilutaim";
         $foundWordTable = $wordFindService->findFromWordbase($request);
-        return $foundWordTable;
+        return response()->json($foundWordTable);
     }
 }
