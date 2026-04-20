@@ -2,21 +2,21 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Support\Facades\Http;
 use App\Services\WordImportService;
-
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
 class WordImportController extends Controller
 {
-    public function import(WordImportService $wordImportService)
+    public function import(WordImportService $wordImportService, Request $request)
     {
-        $response = Http::withoutVerifying()->get('https://www.opus.ee/lemmad2013.txt');
+        $url = Http::withoutVerifying()->get($request->input('url'));
 
-        if (!$response->successful()) {
-            return 'Failed to fetch wordbase';
+        if (!$url->successful()) {
+            return response()->json(['message' => 'Failed to fetch wordbase'], 400);
         }
 
-        $wordImportService->importFromWordbase($response);
+        $wordImportService->importFromWordbase($url);
 
-        return "Wordbase imported";
+        return response()->json(['message' => 'Wordbase imported']);
     }
 }

@@ -8,5 +8,5 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/wordbase/import', [WordImportController::class, 'import']);
+Route::post('/wordbase/import', [WordImportController::class, 'import']);
 Route::get('/wordbase/find/{word}', [WordFindController::class, 'find']);

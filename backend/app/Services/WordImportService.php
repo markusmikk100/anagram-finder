@@ -5,7 +5,7 @@ namespace App\Services;
 use App\Models\Word;
 use App\Services\WordSortingService;
 
-ini_set('max_execution_time', 600); # 10min
+ini_set('max_execution_time', 120); # 2min
 class WordImportService
 {
     public function __construct(protected WordSortingService $wordSortingService)
@@ -17,7 +17,7 @@ class WordImportService
         $data = [];
         $now = now();
 
-        for ($i = 0; $i < count($word); $i++) {
+        for ($i = 0; $i < \count($word); $i++) {
             $currentWord = trim($word[$i]);
 
             if ($currentWord === '') {
@@ -32,11 +32,12 @@ class WordImportService
                 'created_at' => $now,
                 'updated_at' => $now,
             ];
-        }
 
-        foreach (array_chunk($data, 1000) as $chunk) {
-            Word::insertOrIgnore($chunk);
+            if (\count($data) >= 1000) {
+                Word::insertOrIgnore($data);
+                $data = [];
+            }
         }
+        Word::insertOrIgnore($data);
     }
-
 }
