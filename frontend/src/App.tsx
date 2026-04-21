@@ -6,7 +6,7 @@ function App() {
   const [isFindMode, setIsFindMode] = useState(true)
   const [text, setText] = useState('')
   const [data, setData] = useState<string[]>([])
-  const [findResultTitle, setFindResultTitle] = useState('Leitud anagrammid')
+  const [findResultTitle, setFindResultTitle] = useState('Leitud anagrammid:')
   const [importError, setImportError] = useState('')
   const [isWordbaseImporting, setIsWordbaseImporting] = useState(false)
 
@@ -40,11 +40,11 @@ function App() {
       return
     }
 
-    setFindResultTitle('Leitud anagrammid')
+    setFindResultTitle('Leitud anagrammid:')
     setData([])
     const word = encodeURIComponent(trimmedWord)
 
-    fetch(`/wordbase/find/${word}`, { method: 'GET' })
+    fetch(`http://localhost:8000/api/wordbase/find/${word}`, { method: 'GET' })
       .then((response) => {
         if (response.status === 404) {
           setData([])
@@ -68,7 +68,7 @@ function App() {
 
         if (Array.isArray(responseData) && responseData.length > 0) {
           setData(responseData)
-          setFindResultTitle('Leitud anagrammid')
+          setFindResultTitle('Leitud anagrammid:')
         } else {
           setData([])
           setFindResultTitle('Sõna puudub sõnabaasist!')
@@ -88,7 +88,7 @@ function App() {
     }
 
     setIsWordbaseImporting(true)    
-    fetch(`/wordbase/import`, {
+    fetch(`http://localhost:8000/api/wordbase/import`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ url: text.trim() }),
@@ -165,8 +165,8 @@ function App() {
           {isFindMode && (
             <div className="panel">
               <h2>{findResultTitle}</h2>
-              {findResultTitle === 'Leitud anagrammid' && data.map((word) => (
-                <p key={"word"}>{word}</p>
+              {findResultTitle === 'Leitud anagrammid:' && data.map((word) => (
+                <p key={word}>{word}</p>
               ))}
             </div>
           )}
