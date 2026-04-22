@@ -44,7 +44,7 @@ function App() {
     setData([])
     const word = encodeURIComponent(trimmedWord)
 
-    fetch(`http://localhost:8000/api/wordbase/find/${word}`, { method: 'GET' })
+    fetch(`${import.meta.env.VITE_API_URL}/wordbase/find/${word}`, { method: 'GET' })
       .then((response) => {
         if (response.status === 404) {
           setData([])
@@ -76,7 +76,7 @@ function App() {
       })
       .catch((error) => {
         setData([])
-        setFindResultTitle('Viga päringul. Proovi uuesti.')
+        setFindResultTitle('Viga päringul, Proovi uuesti.')
         console.error(error)
       })
   }
@@ -88,14 +88,14 @@ function App() {
     }
 
     setIsWordbaseImporting(true)    
-    fetch(`http://localhost:8000/api/wordbase/import`, {
+    fetch(`${import.meta.env.VITE_API_URL}/wordbase/import`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ url: text.trim() }),
     })
       .then((response) => {
         if (response.status === 500) {
-          throw new Error('Importimine ebaõnnestus. Kontrolli URL-i.')
+          throw new Error('Importimine ebaõnnestus. Kontrolli URL.')
         }
         if (!response.ok) {
           throw new Error(`Request failed with status ${response.status}`)
@@ -108,7 +108,7 @@ function App() {
       })
       .catch((error) => {
         setIsWordbaseImporting(false)
-        setImportError('Importimine ebaõnnestus. Kontrolli URL-i.')
+        setImportError('Importimine ebaõnnestus. Kontrolli URL.')
         console.error(error)
       })
   }
