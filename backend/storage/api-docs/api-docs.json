@@ -1,0 +1,92 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "anagram-lookup",
+        "description": "API documentation for anagram-lookup",
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/api/wordbase/find/{word}": {
+            "get": {
+                "tags": [
+                    "Find"
+                ],
+                "summary": "Find anagrams for a word",
+                "operationId": "07a8e2ee5005e5470c2e107b2c18a1d2",
+                "parameters": [
+                    {
+                        "name": "word",
+                        "in": "path",
+                        "description": "The word to find anagrams for",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "JSON array of anagrams (Empty if word not in the wordbase)",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "string"
+                                    }
+                                },
+                                "example": [
+                                    "ilutaim",
+                                    "liituma",
+                                    "maituli"
+                                ]
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/wordbase/import": {
+            "post": {
+                "tags": [
+                    "Import"
+                ],
+                "summary": "Import wordbase",
+                "operationId": "2f16425b69c625383636e6f80c416355",
+                "requestBody": {
+                    "description": "Import wordbase",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {},
+                            "example": {
+                                "url": "https://www.opus.ee/lemmad2013.txt"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Wordbase imported"
+                    },
+                    "400": {
+                        "description": "Invalid URL"
+                    },
+                    "415": {
+                        "description": "Only plain text files allowed"
+                    }
+                }
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "Find",
+            "description": "Find"
+        },
+        {
+            "name": "Import",
+            "description": "Import"
+        }
+    ]
+}

@@ -10,9 +10,9 @@ class WordFindService
     public function __construct(protected WordSortingService $wordSortingService)
     {
     }
-    public function findFromWordbase($request)
+    public function findFromWordbase($word)
     {
-        $sortedWord = $this->wordSortingService->alphabeticalSort($request);
+        $sortedWord = $this->wordSortingService->alphabeticalSort($word);
         $foundTable = Word::where('sorted_word', '=', $sortedWord)->get();
         $foundWordTable = $foundTable->pluck('word')->toArray();
         return $foundWordTable;
