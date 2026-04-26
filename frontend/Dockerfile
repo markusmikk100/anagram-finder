@@ -1,6 +1,7 @@
 FROM node:22-alpine AS build
 
-ARG VITE_API_URL
+ARG VITE_API_URL=https://anagram-finder-backend-production.up.railway.app/api
+# Would use .env and railway variables to change it, but for some reason its not changing
 ENV VITE_API_URL=$VITE_API_URL
 
 WORKDIR /app
