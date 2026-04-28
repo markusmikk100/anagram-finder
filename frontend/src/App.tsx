@@ -52,12 +52,12 @@ function App() {
       .then((response) => {
         if (response.status === 404) {
           setData([])
-          setFindResultTitle('Word Was not found')
+          setFindResultTitle('Word Was not found!')
           return null
         }
         if (response.status === 502) {
           setData([])
-          setFindResultTitle('Backend does not work')
+          setFindResultTitle('Backend does not work!')
           return null
         }
         if (!response.ok) {
@@ -75,7 +75,7 @@ function App() {
           setFindResultTitle('Found anagrams:')
         } else {
           setData([])
-          setFindResultTitle('Word missing from database:')
+          setFindResultTitle('Word missing from database!')
         }
       })
       .catch((error) => {
@@ -87,7 +87,7 @@ function App() {
 
   function importRequest(text: string) {
     if (!text.trim()) {
-      setImportError('Enter URL')
+      setImportError('Enter URL!')
       return
     }
 
@@ -108,7 +108,7 @@ function App() {
       })
       .then(() => {
         setIsWordbaseImporting(false)
-        setImportError('Wordbase imported')
+        setImportError('Wordbase imported!')
       })
       .catch((error) => {
         setIsWordbaseImporting(false)
@@ -152,7 +152,7 @@ function App() {
             <input
               value={text}
               onChange={(event) => setText(event.target.value)}
-              placeholder={isFindMode ? t('listen') : t('placeholder_url')}
+              placeholder={isFindMode ? t('Listen') : t('placeholder_url')}
             />
 
             <button type="submit">
@@ -163,7 +163,7 @@ function App() {
               <button type="button" onClick={handleUseDefault}>
                 {t('Import example wordbase')}
               </button>
-            )}
+              )}
 
             {!isFindMode && importError && (
               <p className="import-message">{t(importError)}</p>

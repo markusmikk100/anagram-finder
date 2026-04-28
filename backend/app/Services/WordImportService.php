@@ -13,12 +13,12 @@ class WordImportService
     }
     public function importFromWordbase($response)
     {
-        $word = explode("\n", $response->body());
+        $words = explode("\n", $response->body());
         $data = [];
         $now = now();
 
-        for ($i = 0; $i < \count($word); $i++) {
-            $currentWord = trim($word[$i]);
+        for ($i = 0; $i < \count($words); $i++) {
+            $currentWord = trim($words[$i]);
 
             if ($currentWord === '') {
                 continue;
