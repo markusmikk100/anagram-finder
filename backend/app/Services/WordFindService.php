@@ -12,6 +12,7 @@ class WordFindService
     }
     public function findFromWordbase($word)
     {
+        $word = mb_strtolower($word);
         $sortedWord = $this->wordSortingService->alphabeticalSort($word);
         $foundTable = Word::where('sorted_word', '=', $sortedWord)->get();
         $foundWordTable = $foundTable->pluck('word')->toArray();
