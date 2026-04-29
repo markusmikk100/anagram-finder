@@ -1,6 +1,6 @@
 # anagram-finder
 Anagram finder is a web application to find anagrams from a given word. <br>
-Language support (i18n): English and Estonian
+Language support (i18n): English and Estonian.
 <br><br>
 ## Requirements
 You need to have:
@@ -77,7 +77,14 @@ Swagger UI is available at:
 
 - http://127.0.0.1:8000/api/documentation (Local)
 - https://anagram-finder-backend-production.up.railway.app/api/documentation (Railway)
-  (PS: Change server, else it will try to run local)
+  (PS: Change server, else it will try to run local.)
+<br><br>
+## Testing
+Run the unit tests from the backend directory:
+```bash
+php artisan test
+```
+It tests the algorithm that sorts words before storing them.
 <br><br>
 ## Endpoints
 - GET | /api/wordbase/find/{word}
@@ -89,8 +96,8 @@ Import request body:
   "url": "https://www.opus.ee/lemmad2013.txt"
 }
 ```
-
+<br><br>
 ## Railway
-Application is also deployed on Railway and will close on May 19 2026
+Application is also deployed on Railway and will close on May 19 2026.
 - Frontend: https://anagram-finder-frontend-production.up.railway.app
 - Backend: https://anagram-finder-backend-production.up.railway.app
