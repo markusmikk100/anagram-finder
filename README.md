@@ -96,7 +96,7 @@ Import request body:
   "url": "https://www.opus.ee/lemmad2013.txt"
 }
 ```
-<br><br>
+<br>
 ## Railway
 Application is also deployed on Railway and will close on May 19 2026.
 - Frontend: https://anagram-finder-frontend-production.up.railway.app
